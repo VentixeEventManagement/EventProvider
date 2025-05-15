@@ -2,10 +2,10 @@
 using Data.Repositories;
 using EventProvider.Data.Contexts;
 using EventProvider.Data.Entities;
-using EventProvider.Data.Interfaces;
+using EventProvider.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace EventProvider.Data.Repositories
+namespace EventProvider.Data.Interfaces
 {
     public class EventRepository : BaseRepository<EventEntity>, IEventRepository
     {

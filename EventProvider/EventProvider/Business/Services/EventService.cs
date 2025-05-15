@@ -4,10 +4,11 @@ using EventProvider.Business.Factories;
 using EventProvider.Business.Interfaces;
 using EventProvider.Data.Entities;
 using EventProvider.Data.Repositories;
+using System.Linq.Expressions;
 
 namespace EventProvider.Business.Services
 {
-    public class EventService(IEventRepository eventRepository)
+    public class EventService(IEventRepository eventRepository) : IEventService
     {
         private readonly IEventRepository _eventRepository = eventRepository;
 
@@ -18,14 +19,47 @@ namespace EventProvider.Business.Services
             return events!;
         }
 
-        public async Task<Event> GetProjectByIdAsync(int eventId)
+        public async Task<Event> GetEventByIdAsync(int eventId)
         {
-            var project = await _eventRepository.GetAsync(p => p.Id == eventId);
-            if (project == null)
+            var eventobj = await _eventRepository.GetAsync(p => p.Id == eventId);
+            if (eventobj == null)
                 return null!;
-            return EventFactory.Create(event)!;
+            return EventFactory.Create(eventobj)!;
 
         }
+
+        public async Task<bool> CreateEventAsync(EventRegistrationModel eventData)
+        {
+            if (!await _eventRepository.ExistsAsync(e => e.Id == eventData.Id))
+                return false;
+
+            var EventtEntity = EventFactory.Create(eventData);
+
+            if (EventtEntity == null)
+                return false;
+
+            var result = await _eventRepository.AddAsync(EventtEntity);
+            return result;
+        }
+
+        public async Task<bool> EditEventAsync(int eventId, EventRegistrationModel newEventData)
+        {
+            var targetEvent = await _eventRepository.GetAsync(e => e.Id == eventId);
+            if (targetEvent == null)
+                return false;
+
+            targetEvent.Name = newEventData.Name;
+            targetEvent.Description = newEventData.Description;
+            targetEvent.StartDate = newEventData.StartDate;
+            targetEvent.EndDate = newEventData.EndDate;
+            targetEvent.Location = newEventData.Location;
+            targetEvent.TicketPrice = newEventData.TicketPrice;
+            targetEvent.TicketAmount = newEventData.TicketAmount;
+
+            bool result = await _eventRepository.UpdateAsync(targetEvent);
+            return result;
+        }
+
 
 
 
