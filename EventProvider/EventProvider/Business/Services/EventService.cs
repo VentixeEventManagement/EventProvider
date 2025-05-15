@@ -3,7 +3,6 @@ using EventProvider.Business.Models;
 using EventProvider.Business.Factories;
 using EventProvider.Business.Interfaces;
 using EventProvider.Data.Entities;
-using EventProvider.Data.Repositories;
 using System.Linq.Expressions;
 
 namespace EventProvider.Business.Services
@@ -30,8 +29,6 @@ namespace EventProvider.Business.Services
 
         public async Task<bool> CreateEventAsync(EventRegistrationModel eventData)
         {
-            if (!await _eventRepository.ExistsAsync(e => e.Id == eventData.Id))
-                return false;
 
             var EventtEntity = EventFactory.Create(eventData);
 

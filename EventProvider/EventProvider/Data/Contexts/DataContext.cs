@@ -3,16 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventProvider.Data.Contexts
 {
-    public class DataContext : DbContext
+    public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        {
-        }
-
-        protected DataContext()
-        {
-        }
-
-        public DbSet<EventEntity> Customers { get; set; }
+        public DbSet<EventEntity> Events { get; set; }
     }
 }

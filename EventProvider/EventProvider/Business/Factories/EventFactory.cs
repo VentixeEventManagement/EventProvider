@@ -30,7 +30,7 @@ namespace EventProvider.Business.Factories
                 EndDate = entity.EndDate,
                 Location = entity.Location,
                 TicketPrice = entity.TicketPrice,
-                TicketsLeft = entity.TicketAmount
+                TicketAmount = entity.TicketAmount
             };
         }
     }

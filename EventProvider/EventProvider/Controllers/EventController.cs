@@ -32,7 +32,7 @@ namespace EventProvider.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(EventRegistrationModel form)
         {
-            if (!ModelState.IsValid && form.Id < 1)
+            if (!ModelState.IsValid)
                 return BadRequest();
 
             var result = await _eventService.CreateEventAsync(form);
@@ -43,7 +43,7 @@ namespace EventProvider.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditProject(int id, EventRegistrationModel form)
         {
-            if (!ModelState.IsValid && form.Id < 1)
+            if (!ModelState.IsValid)
                 return BadRequest();
 
             var result = await _eventService.EditEventAsync(id, form);

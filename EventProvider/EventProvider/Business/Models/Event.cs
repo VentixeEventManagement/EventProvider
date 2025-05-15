@@ -9,7 +9,7 @@
         public DateTime EndDate { get; set; }
         public string Location { get; set; } = null!;
         public int TicketPrice { get; set; }
-        public string TicketsLeft { get; set; } = null!;
+        public string TicketAmount { get; set; } = null!;
         
     }
 }

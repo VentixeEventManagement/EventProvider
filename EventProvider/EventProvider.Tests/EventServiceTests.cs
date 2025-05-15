@@ -6,7 +6,7 @@ using EventProvider.Business.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace EventProvider.Tests
+namespace EventProvider.Tests // Generated with AI
 {
     public class EventControllerTests
     {
@@ -37,12 +37,12 @@ namespace EventProvider.Tests
         }
 
         [Fact]
-        public async Task Create_ReturnsBadRequest_WhenModelStateInvalidOrIdInvalid()
+        public async Task Create_ReturnsBadRequest_WhenModelStateInvalid()
         {
             var mockService = new Mock<IEventService>();
             var controller = new EventController(mockService.Object);
             controller.ModelState.AddModelError("Name", "Required");
-            var form = new EventRegistrationModel { Id = 0 };
+            var form = new EventRegistrationModel { Name = "" }; // No Id
 
             var result = await controller.Create(form);
 
@@ -53,7 +53,7 @@ namespace EventProvider.Tests
         public async Task Create_ReturnsCreated_WhenServiceReturnsTrue()
         {
             var mockService = new Mock<IEventService>();
-            var form = new EventRegistrationModel { Id = 1, Name = "Test" };
+            var form = new EventRegistrationModel { Name = "Test" };
             mockService.Setup(s => s.CreateEventAsync(form)).ReturnsAsync(true);
             var controller = new EventController(mockService.Object);
 
@@ -66,7 +66,7 @@ namespace EventProvider.Tests
         public async Task Create_ReturnsProblem_WhenServiceReturnsFalse()
         {
             var mockService = new Mock<IEventService>();
-            var form = new EventRegistrationModel { Id = 1, Name = "Test" };
+            var form = new EventRegistrationModel { Name = "Test" };
             mockService.Setup(s => s.CreateEventAsync(form)).ReturnsAsync(false);
             var controller = new EventController(mockService.Object);
 
@@ -76,12 +76,12 @@ namespace EventProvider.Tests
         }
 
         [Fact]
-        public async Task EditProject_ReturnsBadRequest_WhenModelStateInvalidOrIdInvalid()
+        public async Task EditProject_ReturnsBadRequest_WhenModelStateInvalid()
         {
             var mockService = new Mock<IEventService>();
             var controller = new EventController(mockService.Object);
             controller.ModelState.AddModelError("Name", "Required");
-            var form = new EventRegistrationModel { Id = 0 };
+            var form = new EventRegistrationModel { Name = "" };
 
             var result = await controller.EditProject(1, form);
 
@@ -92,7 +92,7 @@ namespace EventProvider.Tests
         public async Task EditProject_ReturnsOk_WhenServiceReturnsTrue()
         {
             var mockService = new Mock<IEventService>();
-            var form = new EventRegistrationModel { Id = 1, Name = "Test" };
+            var form = new EventRegistrationModel { Name = "Test" };
             mockService.Setup(s => s.EditEventAsync(1, form)).ReturnsAsync(true);
             var controller = new EventController(mockService.Object);
 
@@ -106,7 +106,7 @@ namespace EventProvider.Tests
         public async Task EditProject_ReturnsBadRequest_WhenServiceReturnsFalse()
         {
             var mockService = new Mock<IEventService>();
-            var form = new EventRegistrationModel { Id = 1, Name = "Test" };
+            var form = new EventRegistrationModel { Name = "Test" };
             mockService.Setup(s => s.EditEventAsync(1, form)).ReturnsAsync(false);
             var controller = new EventController(mockService.Object);
 
