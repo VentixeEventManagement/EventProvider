@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Data.Repositories
+namespace EventProvider.Data.Interfaces
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Data.Entities;
+﻿using EventProvider.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-namespace Data.Contexts
+
+namespace EventProvider.Data.Contexts
 {
     public class DataContext : DbContext
     {
@@ -13,7 +13,6 @@ namespace Data.Contexts
         {
         }
 
-        public DbSet<CustomerEntity> Customers { get; set; }
-        public DbSet<ProjectEntity> Projects { get; set; }
+        public DbSet<EventEntity> Customers { get; set; }
     }
 }

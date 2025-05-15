@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq.Expressions;
-using Data.Contexts;
+﻿using EventProvider.Data.Contexts;
 using EventProvider.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Linq.Expressions;
 
 namespace Data.Repositories
 {
-    public abstract class BaseRepository<TEntity>(DataContext context) : IBaseRepository<TEntity>, IBaseRepository<TEntity> where TEntity : class
+    public abstract class BaseRepository<TEntity>(DataContext context) : IBaseRepository<TEntity> where TEntity : class
     {
         protected readonly DataContext _context = context;
         protected readonly DbSet<TEntity> _db = context.Set<TEntity>();
@@ -74,6 +73,5 @@ namespace Data.Repositories
                 return false;
             }
         }
-
     }
 }
