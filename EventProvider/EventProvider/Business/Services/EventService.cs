@@ -19,7 +19,7 @@ namespace EventProvider.Business.Services
             return events!;
         }
 
-        public async Task<Event> GetEventByIdAsync(int eventId)
+        public async Task<Event?> GetEventByIdAsync(int eventId)
         {
             var eventobj = await _eventRepository.GetAsync(p => p.Id == eventId);
             if (eventobj == null)
@@ -57,6 +57,16 @@ namespace EventProvider.Business.Services
             targetEvent.TicketAmount = newEventData.TicketAmount;
 
             bool result = await _eventRepository.UpdateAsync(targetEvent);
+            return result;
+        }
+
+        public async Task<bool> DeleteEventAsync(int eventId)
+        {
+            var targetEvent = await _eventRepository.GetAsync(e => e.Id == eventId);
+            if (targetEvent == null)
+                return false;
+
+            bool result = await _eventRepository.RemoveAsync(targetEvent);
             return result;
         }
 
