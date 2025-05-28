@@ -5,6 +5,7 @@ using EventProvider.Business.Interfaces;
 using EventProvider.Business.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace EventProvider.Tests // Generated with AI
 {
@@ -16,7 +17,9 @@ namespace EventProvider.Tests // Generated with AI
             var mockService = new Mock<IEventService>();
             var eventModel = new Event { Id = 1, Name = "Test" };
             mockService.Setup(s => s.GetEventByIdAsync(1)).ReturnsAsync(eventModel);
-            var controller = new EventController(mockService.Object);
+            var mockLogger = new Mock<ILogger<EventController>>();
+            var controller = new EventController(mockService.Object, mockLogger.Object);
+
 
             var result = await controller.GetEventById(1);
 
@@ -29,7 +32,9 @@ namespace EventProvider.Tests // Generated with AI
         {
             var mockService = new Mock<IEventService>();
             mockService.Setup(s => s.GetEventByIdAsync(1)).ReturnsAsync((Event?)null);
-            var controller = new EventController(mockService.Object);
+            var mockLogger = new Mock<ILogger<EventController>>();
+            var controller = new EventController(mockService.Object, mockLogger.Object);
+
 
             var result = await controller.GetEventById(1);
 
@@ -40,7 +45,9 @@ namespace EventProvider.Tests // Generated with AI
         public async Task Create_ReturnsBadRequest_WhenModelStateInvalid()
         {
             var mockService = new Mock<IEventService>();
-            var controller = new EventController(mockService.Object);
+            var mockLogger = new Mock<ILogger<EventController>>();
+            var controller = new EventController(mockService.Object, mockLogger.Object);
+
             controller.ModelState.AddModelError("Name", "Required");
             var form = new EventRegistrationModel { Name = "" }; // No Id
 
@@ -55,7 +62,9 @@ namespace EventProvider.Tests // Generated with AI
             var mockService = new Mock<IEventService>();
             var form = new EventRegistrationModel { Name = "Test" };
             mockService.Setup(s => s.CreateEventAsync(form)).ReturnsAsync(true);
-            var controller = new EventController(mockService.Object);
+            var mockLogger = new Mock<ILogger<EventController>>();
+            var controller = new EventController(mockService.Object, mockLogger.Object);
+
 
             var result = await controller.Create(form);
 
@@ -68,7 +77,9 @@ namespace EventProvider.Tests // Generated with AI
             var mockService = new Mock<IEventService>();
             var form = new EventRegistrationModel { Name = "Test" };
             mockService.Setup(s => s.CreateEventAsync(form)).ReturnsAsync(false);
-            var controller = new EventController(mockService.Object);
+            var mockLogger = new Mock<ILogger<EventController>>();
+            var controller = new EventController(mockService.Object, mockLogger.Object);
+
 
             var result = await controller.Create(form);
 
@@ -79,7 +90,9 @@ namespace EventProvider.Tests // Generated with AI
         public async Task EditProject_ReturnsBadRequest_WhenModelStateInvalid()
         {
             var mockService = new Mock<IEventService>();
-            var controller = new EventController(mockService.Object);
+            var mockLogger = new Mock<ILogger<EventController>>();
+            var controller = new EventController(mockService.Object, mockLogger.Object);
+
             controller.ModelState.AddModelError("Name", "Required");
             var form = new EventRegistrationModel { Name = "" };
 
@@ -94,7 +107,9 @@ namespace EventProvider.Tests // Generated with AI
             var mockService = new Mock<IEventService>();
             var form = new EventRegistrationModel { Name = "Test" };
             mockService.Setup(s => s.EditEventAsync(1, form)).ReturnsAsync(true);
-            var controller = new EventController(mockService.Object);
+            var mockLogger = new Mock<ILogger<EventController>>();
+            var controller = new EventController(mockService.Object, mockLogger.Object);
+
 
             var result = await controller.EditProject(1, form);
 
@@ -108,7 +123,9 @@ namespace EventProvider.Tests // Generated with AI
             var mockService = new Mock<IEventService>();
             var form = new EventRegistrationModel { Name = "Test" };
             mockService.Setup(s => s.EditEventAsync(1, form)).ReturnsAsync(false);
-            var controller = new EventController(mockService.Object);
+            var mockLogger = new Mock<ILogger<EventController>>();
+            var controller = new EventController(mockService.Object, mockLogger.Object);
+
 
             var result = await controller.EditProject(1, form);
 
@@ -121,7 +138,9 @@ namespace EventProvider.Tests // Generated with AI
         {
             var mockService = new Mock<IEventService>();
             mockService.Setup(s => s.DeleteEventAsync(1)).ReturnsAsync(true);
-            var controller = new EventController(mockService.Object);
+            var mockLogger = new Mock<ILogger<EventController>>();
+            var controller = new EventController(mockService.Object, mockLogger.Object);
+
 
             var result = await controller.DeleteEvent(1);
 
@@ -134,7 +153,9 @@ namespace EventProvider.Tests // Generated with AI
         {
             var mockService = new Mock<IEventService>();
             mockService.Setup(s => s.DeleteEventAsync(1)).ReturnsAsync(false);
-            var controller = new EventController(mockService.Object);
+            var mockLogger = new Mock<ILogger<EventController>>();
+            var controller = new EventController(mockService.Object, mockLogger.Object);
+
 
             var result = await controller.DeleteEvent(1);
 

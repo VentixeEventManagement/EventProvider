@@ -7,18 +7,23 @@ using EventProvider.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
-// Register your repository for DI
+// AI-generated code: Swagger XML comments configuration
+var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+builder.Services.AddSwaggerGen(options =>
+{
+    options.IncludeXmlComments(xmlPath);
+    options.EnableAnnotations();
+});
+
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IEventService, EventService>();
 
-// Register CORS policy
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -35,7 +40,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
-app.UseCors(); // Enable CORS before controllers
+app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
