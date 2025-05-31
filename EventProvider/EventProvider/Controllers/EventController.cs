@@ -4,9 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using EventProvider.Business.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.Extensions.Logging;
+using EventProvider.SwaggerExamples;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace EventProvider.Controllers
 {
+    /// <summary>
+    /// Handles API requests related to event management, such as retrieving, creating, updating, and deleting events.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class EventController : ControllerBase
@@ -14,18 +19,24 @@ namespace EventProvider.Controllers
         private readonly IEventService _eventService;
         private readonly ILogger<EventController> _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EventController"/> class.
+        /// </summary>
+        /// <param name="eventService">The service for event business logic.</param>
+        /// <param name="logger">The logger instance for logging errors and information.</param>
         public EventController(IEventService eventService, ILogger<EventController> logger)
         {
             _eventService = eventService;
             _logger = logger;
         }
-        /// AI GENERATED CODE ALL XML COMMENTS SWASHBUCKLER ETC
+
         /// <summary>
         /// Retrieves all events from the system.
         /// </summary>
         /// <returns>A list of all events.</returns>
         [HttpGet]
         [SwaggerResponse(StatusCodes.Status200OK, "A list of all events.", typeof(IEnumerable<Event>))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(EventExample))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "A server or database error occurred while retrieving events. This may be due to a database outage, data corruption, or an unhandled exception.")]
         public async Task<IActionResult> GetEvents()
         {

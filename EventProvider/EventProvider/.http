@@ -1,0 +1,6 @@
+﻿### Get all events through Ocelot API Gateway
+GET https://localhost:7180/events/ @no-verify
+Accept: application/json
+
+  ###
+   

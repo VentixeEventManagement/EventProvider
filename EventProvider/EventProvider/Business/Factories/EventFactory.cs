@@ -3,8 +3,16 @@ using EventProvider.Data.Entities;
 
 namespace EventProvider.Business.Factories
 {
+    /// <summary>
+    /// Provides factory methods for creating Event and EventEntity objects.
+    /// </summary>
     public static class EventFactory
     {
+        /// <summary>
+        /// Creates an EventEntity from an EventRegistrationModel.
+        /// </summary>
+        /// <param name="form">The registration model containing event data.</param>
+        /// <returns>A new EventEntity or null if the input is null.</returns>
         public static EventEntity? Create(EventRegistrationModel form) => form == null ? null : new()
         {
             Name = form.Name,
@@ -16,6 +24,11 @@ namespace EventProvider.Business.Factories
             TicketAmount = form.TicketAmount
         };
 
+        /// <summary>
+        /// Creates an Event model from an EventEntity.
+        /// </summary>
+        /// <param name="entity">The entity containing event data.</param>
+        /// <returns>A new Event model or null if the input is null.</returns>
         public static Event? Create(EventEntity entity)
         {
             if (entity == null)
