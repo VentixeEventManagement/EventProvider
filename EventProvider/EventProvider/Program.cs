@@ -54,6 +54,7 @@ For more details on available endpoints and data models, refer to the Swagger UI
 
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddMemoryCache();
 
 builder.Services.AddCors(options =>
 {

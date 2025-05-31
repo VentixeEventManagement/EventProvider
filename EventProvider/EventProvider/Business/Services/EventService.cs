@@ -4,6 +4,7 @@ using EventProvider.Business.Factories;
 using EventProvider.Business.Interfaces;
 using EventProvider.Data.Entities;
 using System.Linq.Expressions;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace EventProvider.Business.Services
 {
@@ -13,14 +14,18 @@ namespace EventProvider.Business.Services
     public class EventService : IEventService
     {
         private readonly IEventRepository _eventRepository;
+        private readonly IMemoryCache _cache;
+        private const string AllEventsCacheKey = "all_events";
+        private string EventByIdCacheKey(int id) => $"event_{id}";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventService"/> class.
         /// </summary>
         /// <param name="eventRepository">The repository used to access event data.</param>
-        public EventService(IEventRepository eventRepository)
+        public EventService(IEventRepository eventRepository, IMemoryCache cache)
         {
             _eventRepository = eventRepository;
+            _cache = cache;
         }
 
         /// <summary>
@@ -31,8 +36,12 @@ namespace EventProvider.Business.Services
         /// </returns>
         public async Task<IEnumerable<Event>> GetEventsAsync()
         {
-            var entities = await _eventRepository.GetAllAsync();
-            var events = entities.Select(EventFactory.Create);
+            if (!_cache.TryGetValue(AllEventsCacheKey, out IEnumerable<Event> events))
+            {
+                var entities = await _eventRepository.GetAllAsync();
+                events = entities.Select(EventFactory.Create).ToList();
+                _cache.Set(AllEventsCacheKey, events, TimeSpan.FromMinutes(5));
+            }
             return events!;
         }
 
@@ -45,10 +54,16 @@ namespace EventProvider.Business.Services
         /// </returns>
         public async Task<Event?> GetEventByIdAsync(int eventId)
         {
-            var eventobj = await _eventRepository.GetAsync(p => p.Id == eventId);
-            if (eventobj == null)
-                return null!;
-            return EventFactory.Create(eventobj)!;
+            var cacheKey = EventByIdCacheKey(eventId);
+            if (!_cache.TryGetValue(cacheKey, out Event? eventObj))
+            {
+                var eventEntity = await _eventRepository.GetAsync(p => p.Id == eventId);
+                if (eventEntity == null)
+                    return null;
+                eventObj = EventFactory.Create(eventEntity)!;
+                _cache.Set(cacheKey, eventObj, TimeSpan.FromMinutes(5));
+            }
+            return eventObj;
         }
 
         /// <summary>
@@ -66,6 +81,10 @@ namespace EventProvider.Business.Services
                 return false;
 
             var result = await _eventRepository.AddAsync(eventEntity);
+            if (result)
+            {
+                _cache.Remove(AllEventsCacheKey);
+            }
             return result;
         }
 
@@ -92,6 +111,11 @@ namespace EventProvider.Business.Services
             targetEvent.TicketAmount = newEventData.TicketAmount;
 
             bool result = await _eventRepository.UpdateAsync(targetEvent);
+            if (result)
+            {
+                _cache.Remove(AllEventsCacheKey);
+                _cache.Remove(EventByIdCacheKey(eventId));
+            }
             return result;
         }
 
@@ -109,6 +133,11 @@ namespace EventProvider.Business.Services
                 return false;
 
             bool result = await _eventRepository.RemoveAsync(targetEvent);
+            if (result)
+            {
+                _cache.Remove(AllEventsCacheKey);
+                _cache.Remove(EventByIdCacheKey(eventId));
+            }
             return result;
         }
     }
