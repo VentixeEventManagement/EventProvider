@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq.Expressions;
 
+/// <remarks>
+/// This code was formatted and refined using AI assistance.
+/// </remarks>
+
 namespace EventProvider.Data.Repositories
 {
     /// <summary>

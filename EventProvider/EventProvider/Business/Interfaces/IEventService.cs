@@ -1,5 +1,9 @@
 ﻿using EventProvider.Business.Models;
 
+/// <remarks>
+/// This code was formatted and refined using AI assistance.
+/// </remarks>
+
 namespace EventProvider.Business.Interfaces
 {
     /// <summary>

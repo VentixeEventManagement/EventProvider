@@ -1,6 +1,10 @@
 ﻿using EventProvider.Business.Models;
 using EventProvider.Data.Entities;
 
+/// <remarks>
+/// This code was formatted and refined using AI assistance.
+/// </remarks>
+
 namespace EventProvider.Business.Factories
 {
     /// <summary>

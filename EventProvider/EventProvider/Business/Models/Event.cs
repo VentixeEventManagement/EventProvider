@@ -1,4 +1,8 @@
 ﻿namespace EventProvider.Business.Models
+
+/// <remarks>
+/// This code was formatted and refined using AI assistance.
+/// </remarks>
 {
     /// <summary>
     /// Represents an event in the system.

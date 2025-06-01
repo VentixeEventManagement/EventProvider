@@ -4,6 +4,10 @@ using EventProvider.Data.Entities;
 using EventProvider.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
+/// <remarks>
+/// This code was formatted and refined using AI assistance.
+/// </remarks>
+
 namespace EventProvider.Data.Repositories
 {
     /// <summary>

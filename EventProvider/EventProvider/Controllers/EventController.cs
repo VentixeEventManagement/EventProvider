@@ -7,6 +7,10 @@ using Microsoft.Extensions.Logging;
 using EventProvider.SwaggerExamples;
 using Swashbuckle.AspNetCore.Filters;
 
+/// <remarks>
+/// This code was formatted and refined using AI assistance.
+/// </remarks>
+
 namespace EventProvider.Controllers
 {
     /// <summary>

@@ -2,6 +2,10 @@
 using EventProvider.Business.Models;
 using System;
 
+/// <remarks>
+/// This code was formatted and refined using AI assistance.
+/// </remarks>
+
 namespace EventProvider.SwaggerExamples
 {
     /// <summary>

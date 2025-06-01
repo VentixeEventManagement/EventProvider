@@ -6,6 +6,10 @@ using EventProvider.Data.Entities;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Caching.Memory;
 
+/// <remarks>
+/// This code was formatted and refined using AI assistance.
+/// </remarks>
+
 namespace EventProvider.Business.Services
 {
     /// <summary>

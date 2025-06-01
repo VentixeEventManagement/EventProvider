@@ -7,6 +7,10 @@ using EventProvider.Data.Repositories;
 using Swashbuckle.AspNetCore.Filters;
 using EventProvider.SwaggerExamples;
 
+/// <remarks>
+/// This code was formatted and refined using AI assistance.
+/// </remarks>
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();

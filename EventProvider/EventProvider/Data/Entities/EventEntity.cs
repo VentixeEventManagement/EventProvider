@@ -1,4 +1,8 @@
 ﻿namespace EventProvider.Data.Entities
+
+/// <remarks>
+/// This code was formatted and refined using AI assistance.
+/// </remarks>
 {
     /// <summary>
     /// Represents the event entity used for database storage.
