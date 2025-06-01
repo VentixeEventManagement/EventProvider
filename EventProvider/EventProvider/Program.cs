@@ -1,3 +1,4 @@
+// This code was formatted and refined using AI assistance.
 using EventProvider.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using EventProvider.Business.Interfaces;
@@ -7,9 +8,6 @@ using EventProvider.Data.Repositories;
 using Swashbuckle.AspNetCore.Filters;
 using EventProvider.SwaggerExamples;
 
-/// <remarks>
-/// This code was formatted and refined using AI assistance.
-/// </remarks>
 
 var builder = WebApplication.CreateBuilder(args);
 

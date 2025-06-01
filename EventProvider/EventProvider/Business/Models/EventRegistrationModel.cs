@@ -1,8 +1,6 @@
-﻿namespace EventProvider.Business.Models
+﻿// This code was formatted and refined using AI assistance.
+namespace EventProvider.Business.Models
 
-/// <remarks>
-/// This code was formatted and refined using AI assistance.
-/// </remarks>
 {
     /// <summary>
     /// Represents the data required to register or create a new event.

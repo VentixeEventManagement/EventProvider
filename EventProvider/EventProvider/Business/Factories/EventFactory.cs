@@ -1,9 +1,7 @@
-﻿using EventProvider.Business.Models;
+﻿// This code was formatted and refined using AI assistance.
+using EventProvider.Business.Models;
 using EventProvider.Data.Entities;
 
-/// <remarks>
-/// This code was formatted and refined using AI assistance.
-/// </remarks>
 
 namespace EventProvider.Business.Factories
 {

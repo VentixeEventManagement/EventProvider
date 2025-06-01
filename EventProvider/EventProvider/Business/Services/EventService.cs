@@ -1,4 +1,5 @@
-﻿using EventProvider.Data.Interfaces;
+﻿// This code was formatted and refined using AI assistance.
+using EventProvider.Data.Interfaces;
 using EventProvider.Business.Models;
 using EventProvider.Business.Factories;
 using EventProvider.Business.Interfaces;
@@ -6,9 +7,7 @@ using EventProvider.Data.Entities;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Caching.Memory;
 
-/// <remarks>
-/// This code was formatted and refined using AI assistance.
-/// </remarks>
+
 
 namespace EventProvider.Business.Services
 {
@@ -26,6 +25,7 @@ namespace EventProvider.Business.Services
         /// Initializes a new instance of the <see cref="EventService"/> class.
         /// </summary>
         /// <param name="eventRepository">The repository used to access event data.</param>
+        /// <param name="cache">The memory cache used for caching event data.</param>
         public EventService(IEventRepository eventRepository, IMemoryCache cache)
         {
             _eventRepository = eventRepository;
@@ -40,10 +40,12 @@ namespace EventProvider.Business.Services
         /// </returns>
         public async Task<IEnumerable<Event>> GetEventsAsync()
         {
-            if (!_cache.TryGetValue(AllEventsCacheKey, out IEnumerable<Event> events))
+            if (!_cache.TryGetValue(AllEventsCacheKey, out IEnumerable<Event>? events))
             {
                 var entities = await _eventRepository.GetAllAsync();
-                events = entities.Select(EventFactory.Create).ToList();
+                events = entities.Select(EventFactory.Create)
+                 .Where(e => e != null)!
+                 .ToList()!;
                 _cache.Set(AllEventsCacheKey, events, TimeSpan.FromMinutes(5));
             }
             return events!;

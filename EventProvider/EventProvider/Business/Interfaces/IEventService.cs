@@ -1,10 +1,10 @@
-﻿using EventProvider.Business.Models;
+﻿// This code was formatted and refined using AI assistance.
+using EventProvider.Business.Models;
 
-/// <remarks>
-/// This code was formatted and refined using AI assistance.
-/// </remarks>
+
 
 namespace EventProvider.Business.Interfaces
+
 {
     /// <summary>
     /// Defines methods for managing events in the system.

@@ -1,9 +1,8 @@
-﻿using EventProvider.Data.Entities;
+﻿// This code was formatted and refined using AI assistance.
+using EventProvider.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-/// <remarks>
-/// This code was formatted and refined using AI assistance.
-/// </remarks>
+
 
 namespace EventProvider.Data.Contexts
 {

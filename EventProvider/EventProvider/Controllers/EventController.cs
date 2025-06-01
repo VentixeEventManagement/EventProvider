@@ -1,4 +1,5 @@
-﻿using EventProvider.Business.Interfaces;
+﻿// This code was formatted and refined using AI assistance.
+using EventProvider.Business.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EventProvider.Business.Models;
@@ -7,9 +8,6 @@ using Microsoft.Extensions.Logging;
 using EventProvider.SwaggerExamples;
 using Swashbuckle.AspNetCore.Filters;
 
-/// <remarks>
-/// This code was formatted and refined using AI assistance.
-/// </remarks>
 
 namespace EventProvider.Controllers
 {

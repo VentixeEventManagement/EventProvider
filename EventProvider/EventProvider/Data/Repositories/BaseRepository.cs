@@ -1,12 +1,11 @@
-﻿using EventProvider.Data.Contexts;
+﻿// This code was formatted and refined using AI assistance.
+using EventProvider.Data.Contexts;
 using EventProvider.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq.Expressions;
 
-/// <remarks>
-/// This code was formatted and refined using AI assistance.
-/// </remarks>
+
 
 namespace EventProvider.Data.Repositories
 {

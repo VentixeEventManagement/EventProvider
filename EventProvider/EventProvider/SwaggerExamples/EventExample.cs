@@ -1,10 +1,8 @@
-﻿using Swashbuckle.AspNetCore.Filters;
+﻿// This code was formatted and refined using AI assistance.
+using Swashbuckle.AspNetCore.Filters;
 using EventProvider.Business.Models;
 using System;
 
-/// <remarks>
-/// This code was formatted and refined using AI assistance.
-/// </remarks>
 
 namespace EventProvider.SwaggerExamples
 {

@@ -1,9 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿// This code was formatted and refined using AI assistance.
+using System.Linq.Expressions;
 using EventProvider.Data.Entities;
 
-/// <remarks>
-/// This code was formatted and refined using AI assistance.
-/// </remarks>
 
 namespace EventProvider.Data.Interfaces
 {
