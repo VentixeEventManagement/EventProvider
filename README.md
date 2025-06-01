@@ -1,4 +1,4 @@
-# 🎟️ EventProvider API
+# 📅 EventProvider API
 
 A modern, RESTful microservice for Event management built with **.NET 8**.  
 This API enables you to create, retrieve, update, and delete events, following best practices for microservice architecture.
