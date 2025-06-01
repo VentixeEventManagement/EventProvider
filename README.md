@@ -1,33 +1,41 @@
-🎉 EventProvider API
-A modern, RESTful microservice for event management built with .NET 8.
-This API allows you to create, retrieve, update, and delete events—following best practices for scalable microservices in C#.
+# 🎟️ TicketProvider API
 
-.NET 8.0 API REST Swagger Documented
+A modern, RESTful microservice for Event management built with **.NET 8**.  
+This API enables you to create, retrieve, update, and delete events, following best practices for microservice architecture.
 
-📋 Features
-Full event management: Create, read, update, and delete events
-Participant association: Link participants or resources to specific events
-RESTful API: Standard HTTP methods and status codes
-Interactive Swagger documentation
-Layered architecture: Clear separation of controller, business, and data layers
-Entity Framework Core with SQL Server support
-Integration testing ready
-CORS enabled for all origins
-🚀 Getting Started
-Prerequisites
-.NET 8 SDK
-SQL Server (LocalDB is configured by default)
-Installation
-bash
+![.NET 8.0](https://img.shields.io/badge/.NET-8.0-512BD4)
+![API REST](https://img.shields.io/badge/API-REST-8A2BE2)
+![Swagger Documented](https://img.shields.io/badge/Swagger-Documented-85EA2D)
+
+---
+
+## 📋 Features
+
+- **Full Event management:** Create, read, update, and delete operations
+- **RESTful API:** Standard HTTP methods and status codes
+- **Interactive Swagger documentation**
+- **Layered architecture:** Clear separation of controller, business, and data layers
+- **Entity Framework Core with SQL Server support**
+- **Comprehensive integration testing**
+- **CORS enabled** for all origins
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- SQL Server (**LocalDB** is configured by default)
+
+### Installation
+
+```bash
 # 1. Clone the repository
-git clone https://github.com/VentixeEventManagement/EventProvider.git
-cd EventProvider
+git clone https://github.com/your-username/ticket-provider.git
+cd ticket-provider
 
 # 2. Restore dependencies
 dotnet restore
 
 # 3. Apply database migrations
-dotnet ef database update --project EventProvider
-
-# 4. Run the application
-dotnet run --project EventProvider
