@@ -95,4 +95,11 @@ app.MapControllers();
 
 app.Run();
 
+/// <summary>
+/// Entry point marker class for the EventProvider application.
+/// </summary>
+/// <remarks>
+/// This partial class is used primarily for integration testing and application hosting scenarios.
+/// It enables test projects and external tools to access the application's entry point and services.
+/// </remarks>
 public partial class Program { }
