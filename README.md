@@ -32,7 +32,7 @@ This API enables you to create, retrieve, update, and delete events, following b
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/ticket-provider.git
+git clone [https://github.com/your-username/ticket-provider.git](https://github.com/VentixeEventManagement/EventProvider)
 cd ticket-provider
 
 # 2. Restore dependencies
