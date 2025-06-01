@@ -12,8 +12,19 @@ using EventProvider.SwaggerExamples;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+if (builder.Environment.IsEnvironment("Testing"))
+{
+    builder.Services.AddDbContext<DataContext>(options =>
+        options.UseInMemoryDatabase("InMemoryTestDb"));
+}
+else
+{
+    builder.Services.AddDbContext<DataContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+}
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerExamplesFromAssemblyOf<EventExample>();
 
@@ -83,3 +94,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

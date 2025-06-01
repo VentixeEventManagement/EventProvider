@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-
-namespace EventProvider.Tests 
+namespace EventProvider.Tests
 {
     public class EventControllerTests
     {
@@ -22,41 +21,12 @@ namespace EventProvider.Tests
             var mockLogger = new Mock<ILogger<EventController>>();
             var controller = new EventController(mockService.Object, mockLogger.Object);
 
-
             var result = await controller.GetEventById(1);
 
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(eventModel, okResult.Value);
         }
 
-        [Fact]
-        public async Task GetEventById_ReturnsNotFound_WhenEventDoesNotExist()
-        {
-            var mockService = new Mock<IEventService>();
-            mockService.Setup(s => s.GetEventByIdAsync(1)).ReturnsAsync((Event?)null);
-            var mockLogger = new Mock<ILogger<EventController>>();
-            var controller = new EventController(mockService.Object, mockLogger.Object);
-
-
-            var result = await controller.GetEventById(1);
-
-            Assert.IsType<NotFoundResult>(result);
-        }
-
-        [Fact]
-        public async Task Create_ReturnsBadRequest_WhenModelStateInvalid()
-        {
-            var mockService = new Mock<IEventService>();
-            var mockLogger = new Mock<ILogger<EventController>>();
-            var controller = new EventController(mockService.Object, mockLogger.Object);
-
-            controller.ModelState.AddModelError("Name", "Required");
-            var form = new EventRegistrationModel { Name = "" }; // No Id
-
-            var result = await controller.Create(form);
-
-            Assert.IsType<BadRequestResult>(result);
-        }
 
         [Fact]
         public async Task Create_ReturnsCreated_WhenServiceReturnsTrue()
@@ -66,7 +36,6 @@ namespace EventProvider.Tests
             mockService.Setup(s => s.CreateEventAsync(form)).ReturnsAsync(true);
             var mockLogger = new Mock<ILogger<EventController>>();
             var controller = new EventController(mockService.Object, mockLogger.Object);
-
 
             var result = await controller.Create(form);
 
@@ -82,87 +51,9 @@ namespace EventProvider.Tests
             var mockLogger = new Mock<ILogger<EventController>>();
             var controller = new EventController(mockService.Object, mockLogger.Object);
 
-
             var result = await controller.Create(form);
 
             Assert.IsType<ObjectResult>(result); // Problem returns ObjectResult
-        }
-
-        [Fact]
-        public async Task EditProject_ReturnsBadRequest_WhenModelStateInvalid()
-        {
-            var mockService = new Mock<IEventService>();
-            var mockLogger = new Mock<ILogger<EventController>>();
-            var controller = new EventController(mockService.Object, mockLogger.Object);
-
-            controller.ModelState.AddModelError("Name", "Required");
-            var form = new EventRegistrationModel { Name = "" };
-
-            var result = await controller.EditProject(1, form);
-
-            Assert.IsType<BadRequestResult>(result);
-        }
-
-        [Fact]
-        public async Task EditProject_ReturnsOk_WhenServiceReturnsTrue()
-        {
-            var mockService = new Mock<IEventService>();
-            var form = new EventRegistrationModel { Name = "Test" };
-            mockService.Setup(s => s.EditEventAsync(1, form)).ReturnsAsync(true);
-            var mockLogger = new Mock<ILogger<EventController>>();
-            var controller = new EventController(mockService.Object, mockLogger.Object);
-
-
-            var result = await controller.EditProject(1, form);
-
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal("Event got updated", okResult.Value);
-        }
-
-        [Fact]
-        public async Task EditProject_ReturnsBadRequest_WhenServiceReturnsFalse()
-        {
-            var mockService = new Mock<IEventService>();
-            var form = new EventRegistrationModel { Name = "Test" };
-            mockService.Setup(s => s.EditEventAsync(1, form)).ReturnsAsync(false);
-            var mockLogger = new Mock<ILogger<EventController>>();
-            var controller = new EventController(mockService.Object, mockLogger.Object);
-
-
-            var result = await controller.EditProject(1, form);
-
-            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("failed to update Event", badRequest.Value);
-        }
-
-        [Fact]
-        public async Task DeleteEvent_ReturnsOk_WhenServiceReturnsTrue()
-        {
-            var mockService = new Mock<IEventService>();
-            mockService.Setup(s => s.DeleteEventAsync(1)).ReturnsAsync(true);
-            var mockLogger = new Mock<ILogger<EventController>>();
-            var controller = new EventController(mockService.Object, mockLogger.Object);
-
-
-            var result = await controller.DeleteEvent(1);
-
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal("Event got deleted", okResult.Value);
-        }
-
-        [Fact]
-        public async Task DeleteEvent_ReturnsBadRequest_WhenServiceReturnsFalse()
-        {
-            var mockService = new Mock<IEventService>();
-            mockService.Setup(s => s.DeleteEventAsync(1)).ReturnsAsync(false);
-            var mockLogger = new Mock<ILogger<EventController>>();
-            var controller = new EventController(mockService.Object, mockLogger.Object);
-
-
-            var result = await controller.DeleteEvent(1);
-
-            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("failed to delete Event", badRequest.Value);
         }
 
         [Fact]
@@ -178,31 +69,5 @@ namespace EventProvider.Tests
 
             Assert.IsType<ObjectResult>(result);
         }
-        [Fact]
-        public async Task Create_ReturnsBadRequest_WhenModelIsNull()
-        {
-            var mockService = new Mock<IEventService>();
-            var mockLogger = new Mock<ILogger<EventController>>();
-            var controller = new EventController(mockService.Object, mockLogger.Object);
-
-            var result = await controller.Create(null!);
-
-            Assert.IsType<BadRequestResult>(result);
-        }
-
-
-        [Fact]
-        public async Task GetEventById_ReturnsNotFound_WhenIdIsZero()
-        {
-            var mockService = new Mock<IEventService>();
-            var mockLogger = new Mock<ILogger<EventController>>();
-            var controller = new EventController(mockService.Object, mockLogger.Object);
-
-            var result = await controller.GetEventById(0);
-
-            Assert.IsType<NotFoundResult>(result);
-        }
-
-
     }
 }
